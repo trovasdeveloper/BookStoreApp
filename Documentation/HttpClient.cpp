@@ -1,8 +1,8 @@
 #include "HttpClient.h"
 #include "Book.h"
-
 #include "nlohmann/json.hpp"
 #include "curl/android-21-x86_64/include/curl/curl.h"
+
 #include <stdexcept>
 #include <sstream>
 #include <iostream>
@@ -26,7 +26,6 @@ HttpClient::HttpClient()
 HttpClient::~HttpClient() {
     cleanupCurl();
 }
-
 
 void HttpClient::initCurl()
 {
@@ -95,5 +94,4 @@ std::vector<Book> HttpClient::fetchBooks(const std::string& query)
     }
 
     return books;
-
 }

@@ -119,6 +119,6 @@ Java_com_trovasdeveloper_bookstoreapp_MainActivity_getFavoriteBooks(JNIEnv *env,
     return favoriteBooksArray;
 }
 
-// SetFavoriteBook JNI
+// TODO: SetFavoriteBook JNI
 
 }

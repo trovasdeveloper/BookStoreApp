@@ -7,20 +7,17 @@
 #include <sqlite3.h>
 #include <sstream>
 
-BookDatabase::BookDatabase(const std::string& dbPath)
-{
+BookDatabase::BookDatabase(const std::string& dbPath) {
     sqlite3_open(dbPath.c_str(), &db);
 }
 
-BookDatabase::~BookDatabase()
-{
-    if (db){
+BookDatabase::~BookDatabase() {
+    if (db) {
         sqlite3_close(db);
     }
 }
 
-extern "C"
-{
+extern "C" {
 JNIEXPORT void JNICALL
 Java_com_trovasdeveloper_bookstoreapp_BookDetailActivity_addBookToFavoritesNative(JNIEnv *env,
                                                                                   jobject /* this */,
@@ -52,7 +49,7 @@ Java_com_trovasdeveloper_bookstoreapp_BookDetailActivity_addBookToFavoritesNativ
     env->ReleaseStringUTFChars(buyLink, nativeBuyLink);
 }
 
-// Not used
+// TODO: Not used
 void BookDatabase::setFavorite(int bookId, bool isFavorite) {
     const char *sql = "UPDATE books SET is_favorite = ? WHERE id = ?";
     sqlite3_stmt *stmt;
@@ -76,8 +73,7 @@ std::string joinAuthors(const std::vector<std::string> &authors) {
     return oss.str();
 }
 
-void BookDatabase::addBookToFavorites(const Book &book)
-{
+void BookDatabase::addBookToFavorites(const Book &book) {
     const char *sql = "INSERT INTO favorites (title, authors, description, buy_link) VALUES (?, ?, ?, ?)";
     sqlite3_stmt *stmt;
     sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);

@@ -73,6 +73,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 }
             });
 
+            //BookDetails Activity Listener
             itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), BookDetailActivity.class);
                 intent.putExtra("title", book.title);

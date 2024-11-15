@@ -7,9 +7,7 @@
 #include <memory>
 #include <vector>
 
-
-class HttpClient
-{
+class HttpClient {
 public:
     HttpClient();
     ~HttpClient();

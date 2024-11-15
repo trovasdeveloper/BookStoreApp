@@ -3,8 +3,7 @@
 #include <string>
 #include <vector>
 
-class Book
-{
+class Book {
 public: 
     Book(
         const std::string& title,
@@ -12,7 +11,7 @@ public:
         const std::string& description,
         const std::string& buyLink) : title(title), authors(authors), description(description), buyLink(buyLink) {}
 
-// Getters
+    // Getters
     const std::string& getTitle() const { return title; }
     const std::vector<std::string>& getAuthors() const { return authors; }
     const std::string& getDescription() const { return description; }

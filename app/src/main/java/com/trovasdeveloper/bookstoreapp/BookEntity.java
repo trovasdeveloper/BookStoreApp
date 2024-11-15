@@ -3,6 +3,7 @@ package com.trovasdeveloper.bookstoreapp;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.ColumnInfo;
+
 @Entity(tableName = "books")
 public class BookEntity {
     @PrimaryKey(autoGenerate = true)

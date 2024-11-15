@@ -9,7 +9,6 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.widget.Button;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -53,26 +52,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //Calls JNI getFavoriteBooks
     private void toggleFavorites() {
         showingFavorites = !showingFavorites;
         Log.d(TAG, "toggleFavorites() - " + showingFavorites);
-        updateBookList();
-    }
-
-    private void updateBookList() {
-        List<Book> displayList;
-      if(showingFavorites) {
-          displayList = new ArrayList<>();
-          for(Book book : bookList) {
-              if(book.isFavorite()) {
-                  displayList.add(book);
-              }
-          }
-      }
-      else {
-          displayList = new ArrayList<>(bookList);
-      }
-        bookAdapter.updateBooks(displayList);
+        if (showingFavorites) {
+            Book[] allBooksArray = bookList.toArray(new Book[0]);
+            Book[] favoriteBooksArray = getFavoriteBooks(allBooksArray);
+            bookAdapter.updateBooks(Arrays.asList(favoriteBooksArray));
+        } else {
+            bookAdapter.updateBooks(bookList);
+        }
     }
 
     private void showBookDetails(Book book) {
@@ -83,4 +73,21 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("buyLink", book.buyLink);
         startActivity(intent);
     }
+
+    /* Before Trying backend connection
+    private void updateBookList() {
+        List<Book> displayList;
+        if(showingFavorites) {
+            displayList = new ArrayList<>();
+            for(Book book : bookList) {
+                if(book.isFavorite()) {
+                    displayList.add(book);
+                }
+            }
+        }
+        else {
+            displayList = new ArrayList<>(bookList);
+        }
+        bookAdapter.updateBooks(displayList);
+    }*/
 }
