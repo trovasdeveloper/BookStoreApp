@@ -6,12 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Botão para filtrar favoritos -->
-
-    <!-- RecyclerView para listar os livros -->
-
-    <!-- Seção de detalhes do livro -->
-
     <Button
         android:id="@+id/filter_favorites"
         android:layout_width="wrap_content"
@@ -72,6 +66,5 @@
             android:layout_height="wrap_content"
             android:text="Buy" />
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

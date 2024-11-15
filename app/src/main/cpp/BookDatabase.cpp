@@ -7,12 +7,15 @@
 #include <sqlite3.h>
 #include <sstream>
 
-BookDatabase::BookDatabase(const std::string& dbPath) {
+BookDatabase::BookDatabase(const std::string& dbPath)
+{
     sqlite3_open(dbPath.c_str(), &db);
 }
 
-BookDatabase::~BookDatabase() {
-    if (db) {
+BookDatabase::~BookDatabase()
+{
+    if (db)
+    {
         sqlite3_close(db);
     }
 }
@@ -40,13 +43,12 @@ Java_com_trovasdeveloper_bookstoreapp_BookDetailActivity_addBookToFavoritesNativ
         env->ReleaseStringUTFChars(author, nativeAuthor);
     }
 
-    // Cria um objeto Book e adiciona ao banco de dados
+    // Cria um objeto Book e adiciona a BD
     Book book(nativeTitle, nativeAuthors, nativeDescription, nativeBuyLink);
     BookDatabase bookDatabase(
             "/data/data/com.trovasdeveloper.bookstoreapp/databases/bookstore.db");
     bookDatabase.addBookToFavorites(book);
 
-    // Libera as strings JNI
     env->ReleaseStringUTFChars(title, nativeTitle);
     env->ReleaseStringUTFChars(description, nativeDescription);
     env->ReleaseStringUTFChars(buyLink, nativeBuyLink);

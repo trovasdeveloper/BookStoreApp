@@ -10,8 +10,8 @@
 #include <string>
 #include <sqlite3.h>
 
-
-class BookDatabase {
+class BookDatabase
+{
 public:
     BookDatabase(const std::string& dbPath);
     ~BookDatabase();

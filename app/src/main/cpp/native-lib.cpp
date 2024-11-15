@@ -12,7 +12,7 @@ AAssetManager* assetManager = nullptr;
 
 extern "C" {
 
-// Inicializa o AssetManager a partir do Java para ser usado no C++
+// Asset Manager
 JNIEXPORT void JNICALL
 Java_com_trovasdeveloper_bookstoreapp_MainActivity_initializeAssetManager(JNIEnv* env, jobject /* this */, jobject javaAssetManager) {
     assetManager = AAssetManager_fromJava(env, javaAssetManager);
@@ -25,23 +25,22 @@ Java_com_trovasdeveloper_bookstoreapp_MainActivity_loadBooksFromAsset(JNIEnv *en
         return nullptr;
     }
 
-    // Abrindo o arquivo JSON em assets
+    // Open JSON in assets
     AAsset* asset = AAssetManager_open(assetManager, "books.json", AASSET_MODE_BUFFER);
     if (!asset) {
         std::cerr << "Não foi possível abrir o arquivo JSON!" << std::endl;
         return nullptr;
     }
 
-    // Lendo o conteúdo do arquivo JSON
+    //JSON
     size_t fileSize = AAsset_getLength(asset);
     std::string fileContent(fileSize, '\0');
     AAsset_read(asset, &fileContent[0], fileSize);
     AAsset_close(asset);
 
-    // Parse JSON para vetor de livros
+    // Parse JSON
     json jsonData = json::parse(fileContent);
 
-    // Obter a classe `Book` e seu construtor no lado Java
     jclass bookClass = env->FindClass("com/trovasdeveloper/bookstoreapp/Book");
     if (!bookClass) {
         std::cerr << "Classe Book não encontrada no Java" << std::endl;
@@ -54,14 +53,13 @@ Java_com_trovasdeveloper_bookstoreapp_MainActivity_loadBooksFromAsset(JNIEnv *en
         return nullptr;
     }
 
-    // Criar lista de objetos Book
     std::vector<jobject> bookObjects;
     for (const auto& item : jsonData) {
         std::string title = item.value("title", "");
         std::string description = item.value("description", "");
         std::string buyLink = item.value("buyLink", "");
 
-        // Criando o ArrayList de autores em Java
+        // ArrayList autores Java
         jclass arrayListClass = env->FindClass("java/util/ArrayList");
         jmethodID arrayListConstructor = env->GetMethodID(arrayListClass, "<init>", "()V");
         jobject authorsList = env->NewObject(arrayListClass, arrayListConstructor);
@@ -75,7 +73,7 @@ Java_com_trovasdeveloper_bookstoreapp_MainActivity_loadBooksFromAsset(JNIEnv *en
 
         jboolean jIsFavorite = item.value("isFavorite", false);
 
-        // Criando o objeto Book
+        // Book Object
         jobject bookObject = env->NewObject(
                 bookClass,
                 bookConstructor,
@@ -85,26 +83,19 @@ Java_com_trovasdeveloper_bookstoreapp_MainActivity_loadBooksFromAsset(JNIEnv *en
                 env->NewStringUTF(buyLink.c_str()),
                 jIsFavorite);
 
-        // Adicionando o objeto Book ao array de objetos
         bookObjects.push_back(bookObject);
-
-        // Libera a referência local do authorsList
         env->DeleteLocalRef(authorsList);
     }
 
-    // Criação do array de livros para retornar
     jobjectArray bookArray = env->NewObjectArray(bookObjects.size(), bookClass, nullptr);
     for (size_t i = 0; i < bookObjects.size(); ++i) {
         env->SetObjectArrayElement(bookArray, i, bookObjects[i]);
         env->DeleteLocalRef(bookObjects[i]); // Libera a referência do livro após inserir no array
     }
-
     return bookArray;
 }
 
-
-
-// Função JNI para retornar os livros favoritos
+// JNI to return Favorite List
 JNIEXPORT jobjectArray JNICALL
 Java_com_trovasdeveloper_bookstoreapp_MainActivity_getFavoriteBooks(JNIEnv *env, jobject /* this */, jobjectArray allBooks) {
     jclass bookClass = env->FindClass("com/trovasdeveloper/bookstoreapp/Book");

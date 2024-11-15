@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,8 +16,7 @@ import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder>
 {
-
-    private List<Book> books; // Removido o 'final' para permitir atualizações
+    private List<Book> books;
     private final OnBookClickListener listener;
 
     public BookAdapter(List<Book> books, OnBookClickListener listener) {
@@ -62,14 +60,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             authorsTextView.setText(String.join(", ", book.authors));
             descriptionTextView.setText(book.description);
 
-            // Abre o link de compra no navegador quando o botão é clicado
+            // Open Link Browser
             buyButton.setOnClickListener(v -> {
                 Context context = v.getContext();
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(book.buyLink));
                 context.startActivity(browserIntent);
             });
 
-            // Configura o clique no item para acionar o listener
             itemView.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.onBookClick(book);
@@ -91,25 +88,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         void onBookClick(Book book);
     }
 
-    // Método para atualizar a lista de livros
     public void updateBooks(List<Book> newBooks) {
         books = new ArrayList<>(newBooks);
         notifyDataSetChanged();
     }
-/*
-    // Atualiza o status de favorito de um livro específico
-    public void updateBookFavoriteStatus(Book updatedBook) {
-        int index = -1;
-        for (int i = 0; i < books.size(); i++) {
-            if (books.get(i).getId() == updatedBook.getId()) {
-                index = i;
-                break;
-            }
-        }
-        if (index != -1) {
-            books.set(index, updatedBook);
-            notifyItemChanged(index);
-        }
-    }*/
-
 }

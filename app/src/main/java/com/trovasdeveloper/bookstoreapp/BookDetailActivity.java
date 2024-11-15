@@ -12,9 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class BookDetailActivity extends AppCompatActivity {
 
-    private native void addBookToFavoritesNative(String title, String description, String buyLink, String[] authors);
-    //private BookDatabase bookDatabase;
-
+    private native void addBookToFavoritesNative(String title,
+                                                 String description,
+                                                 String buyLink,
+                                                 String[] authors);
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,6 @@ public class BookDetailActivity extends AppCompatActivity {
         TextView descriptionTextView = findViewById(R.id.book_detail_description);
         Button buyButton = findViewById(R.id.buy_button_detail);
 
-        // Recebe os dados do Intent
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
         String authors = intent.getStringExtra("authors");
@@ -42,7 +42,6 @@ public class BookDetailActivity extends AppCompatActivity {
         authorsTextView.setText(authors);
         descriptionTextView.setText(description);
 
-        // Configura o botão de compra
         buyButton.setOnClickListener(v -> {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(buyLink));
             startActivity(browserIntent);
@@ -54,8 +53,6 @@ public class BookDetailActivity extends AppCompatActivity {
             addBookToFavoritesNative(title, description, buyLink, authorsArray);
         });
 
-
-
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -65,5 +62,4 @@ public class BookDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
