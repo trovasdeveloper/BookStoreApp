@@ -96,6 +96,20 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         books = new ArrayList<>(newBooks);
         notifyDataSetChanged();
     }
-
+/*
+    // Atualiza o status de favorito de um livro específico
+    public void updateBookFavoriteStatus(Book updatedBook) {
+        int index = -1;
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i).getId() == updatedBook.getId()) {
+                index = i;
+                break;
+            }
+        }
+        if (index != -1) {
+            books.set(index, updatedBook);
+            notifyItemChanged(index);
+        }
+    }*/
 
 }

@@ -3,6 +3,7 @@ package com.trovasdeveloper.bookstoreapp;
 import java.util.List;
 
 public class Book {
+    private int id;
     public String title;
     public List<String> authors;
     public String description;
@@ -17,13 +18,29 @@ public class Book {
         this.isFavorite = isFavorite;
     }
 
-    // Método para verificar se é favorito
+
+    public String getTitle() {
+        return title;
+    }
+
+    public List<String> getAuthors() {
+        return authors;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getBuyLink() {
+        return buyLink;
+    }
+
     public boolean isFavorite() {
         return isFavorite;
     }
 
-    // Método para definir como favorito
     public void setFavorite(boolean favorite) {
         this.isFavorite = favorite;
+
     }
 }

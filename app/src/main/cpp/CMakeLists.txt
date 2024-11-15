@@ -11,7 +11,20 @@ cmake_minimum_required(VERSION 3.22.1)
 # build script scope).
 project("bookstoreapp")
 
+# Include directories for headers
 include_directories("src/main/cpp/include")
+include_directories("src/main/cpp/libs/sqlite")
+
+# Define the directory for SQLite
+set(SQLITE3_DIR ${CMAKE_SOURCE_DIR}/libs/sqlite)
+
+# Add sqlite3.c as a static library
+add_library(sqlite3 STATIC ${SQLITE3_DIR}/sqlite3.c)
+
+# Include the SQLite directory for headers
+include_directories(${SQLITE3_DIR})
+
+
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
@@ -28,6 +41,7 @@ include_directories("src/main/cpp/include")
 # used in the AndroidManifest.xml file.
 add_library(${CMAKE_PROJECT_NAME} SHARED
         # List C/C++ source files with relative paths to this CMakeLists.txt.
+        BookDatabase.cpp
         native-lib.cpp)
 
 # Specifies libraries CMake should link to your target library. You
@@ -35,5 +49,6 @@ add_library(${CMAKE_PROJECT_NAME} SHARED
 # build script, prebuilt third-party libraries, or Android system libraries.
 target_link_libraries(${CMAKE_PROJECT_NAME}
         # List libraries link to the target library
+        sqlite3
         android
         log)

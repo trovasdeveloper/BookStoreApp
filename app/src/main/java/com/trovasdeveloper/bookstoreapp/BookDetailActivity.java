@@ -3,6 +3,7 @@ package com.trovasdeveloper.bookstoreapp;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -11,10 +12,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class BookDetailActivity extends AppCompatActivity {
 
+    private native void addBookToFavoritesNative(String title, String description, String buyLink, String[] authors);
+    //private BookDatabase bookDatabase;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
+
+        //Action Bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Book Details");
+        }
 
         TextView titleTextView = findViewById(R.id.book_detail_title);
         TextView authorsTextView = findViewById(R.id.book_detail_authors);
@@ -37,5 +47,23 @@ public class BookDetailActivity extends AppCompatActivity {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(buyLink));
             startActivity(browserIntent);
         });
+
+        Button addToFavoritesButton = findViewById(R.id.button_add_to_favorites);
+        addToFavoritesButton.setOnClickListener(v -> {
+            String[] authorsArray = authors.split(",");
+            addBookToFavoritesNative(title, description, buyLink, authorsArray);
+        });
+
+
+
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
