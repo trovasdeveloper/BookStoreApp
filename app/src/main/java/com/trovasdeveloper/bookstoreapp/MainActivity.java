@@ -70,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
           }
       }
       else {
-          displayList = new ArrayList<>(bookList); // Cria uma cópia mutável da lista original
+          displayList = new ArrayList<>(bookList);
       }
-        bookAdapter.updateBooks(displayList); // Atualiza o adapter com a lista apropriada
+        bookAdapter.updateBooks(displayList);
     }
 
     private void showBookDetails(Book book) {

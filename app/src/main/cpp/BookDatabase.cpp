@@ -14,8 +14,7 @@ BookDatabase::BookDatabase(const std::string& dbPath)
 
 BookDatabase::~BookDatabase()
 {
-    if (db)
-    {
+    if (db){
         sqlite3_close(db);
     }
 }
@@ -28,12 +27,12 @@ Java_com_trovasdeveloper_bookstoreapp_BookDetailActivity_addBookToFavoritesNativ
                                                                                   jstring title,
                                                                                   jstring description,
                                                                                   jstring buyLink,
-                                                                                  jobjectArray authors) {
+                                                                                  jobjectArray authors)
+{
     const char *nativeTitle = env->GetStringUTFChars(title, 0);
     const char *nativeDescription = env->GetStringUTFChars(description, 0);
     const char *nativeBuyLink = env->GetStringUTFChars(buyLink, 0);
 
-    // Converte o array de autores para um vetor de strings C++
     std::vector<std::string> nativeAuthors;
     jsize authorsLength = env->GetArrayLength(authors);
     for (jsize i = 0; i < authorsLength; ++i) {
@@ -43,7 +42,6 @@ Java_com_trovasdeveloper_bookstoreapp_BookDetailActivity_addBookToFavoritesNativ
         env->ReleaseStringUTFChars(author, nativeAuthor);
     }
 
-    // Cria um objeto Book e adiciona a BD
     Book book(nativeTitle, nativeAuthors, nativeDescription, nativeBuyLink);
     BookDatabase bookDatabase(
             "/data/data/com.trovasdeveloper.bookstoreapp/databases/bookstore.db");
@@ -54,6 +52,7 @@ Java_com_trovasdeveloper_bookstoreapp_BookDetailActivity_addBookToFavoritesNativ
     env->ReleaseStringUTFChars(buyLink, nativeBuyLink);
 }
 
+// Not used
 void BookDatabase::setFavorite(int bookId, bool isFavorite) {
     const char *sql = "UPDATE books SET is_favorite = ? WHERE id = ?";
     sqlite3_stmt *stmt;

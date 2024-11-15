@@ -1,10 +1,7 @@
 package com.trovasdeveloper.bookstoreapp;
 
 import java.util.List;
-
-
 public class Book {
-    private int id;
     public String title;
     public List<String> authors;
     public String description;

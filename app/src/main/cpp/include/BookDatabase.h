@@ -1,7 +1,3 @@
-//
-// Created by andre on 11/15/2024.
-//
-
 #ifndef BOOKDATABASE_H
 #define BOOKDATABASE_H
 

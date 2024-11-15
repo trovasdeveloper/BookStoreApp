@@ -5,7 +5,7 @@
 #include <vector>
 #include <iostream>
 #include "include/Book.h"
-#include "json.hpp" // Supondo que você esteja usando nlohmann/json
+#include "json.hpp"
 
 using json = nlohmann::json;
 AAssetManager* assetManager = nullptr;
@@ -40,7 +40,6 @@ Java_com_trovasdeveloper_bookstoreapp_MainActivity_loadBooksFromAsset(JNIEnv *en
 
     // Parse JSON
     json jsonData = json::parse(fileContent);
-
     jclass bookClass = env->FindClass("com/trovasdeveloper/bookstoreapp/Book");
     if (!bookClass) {
         std::cerr << "Classe Book não encontrada no Java" << std::endl;
@@ -59,7 +58,7 @@ Java_com_trovasdeveloper_bookstoreapp_MainActivity_loadBooksFromAsset(JNIEnv *en
         std::string description = item.value("description", "");
         std::string buyLink = item.value("buyLink", "");
 
-        // ArrayList autores Java
+        // ArrayList Authors
         jclass arrayListClass = env->FindClass("java/util/ArrayList");
         jmethodID arrayListConstructor = env->GetMethodID(arrayListClass, "<init>", "()V");
         jobject authorsList = env->NewObject(arrayListClass, arrayListConstructor);
@@ -119,5 +118,7 @@ Java_com_trovasdeveloper_bookstoreapp_MainActivity_getFavoriteBooks(JNIEnv *env,
 
     return favoriteBooksArray;
 }
+
+// SetFavoriteBook JNI
 
 }
