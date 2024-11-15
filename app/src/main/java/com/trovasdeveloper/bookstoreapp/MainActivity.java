@@ -3,13 +3,15 @@ package com.trovasdeveloper.bookstoreapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.util.Log;
+
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.widget.Button;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     static {
         System.loadLibrary("bookstoreapp");
     }
-
+    private static final String TAG = "MainActivity";
     public native Book[] loadBooksFromAsset();
     public native Book[] getFavoriteBooks(Book[] allBooks);
     public native void initializeAssetManager(AssetManager assetManager);
@@ -50,15 +52,37 @@ public class MainActivity extends AppCompatActivity {
         // Configurar o botão de filtro de favoritos
         filterButton = findViewById(R.id.filter_favorites);
         filterButton.setOnClickListener(view -> {
-            showingFavorites = !showingFavorites;
-            filterButton.setText(showingFavorites ? "Show All" : "Show Favorites");
+            filterButton.setText(showingFavorites ? "Show Favorites" : "Show All");
             toggleFavorites();
         });
     }
 
     private void toggleFavorites() {
-        List<Book> booksToShow = showingFavorites ? favoriteBooks : bookList;
-        bookAdapter.updateBooks(booksToShow); // Atualiza a lista no Adapter
+        showingFavorites = !showingFavorites;
+        Log.d(TAG, "toggleFavorites() - " + showingFavorites);
+        updateBookList();
+    }
+
+    private void updateBookList()
+    {
+      List<Book> displayList;
+      if(showingFavorites)
+      {
+          displayList = new ArrayList<>();
+          for(Book book : bookList)
+          {
+              if(book.isFavorite())
+              {
+                  displayList.add(book);
+              }
+          }
+      }
+      else
+      {
+          displayList = new ArrayList<>(bookList); // Cria uma cópia mutável da lista original
+      }
+        bookAdapter.updateBooks(displayList); // Atualiza o adapter com a lista apropriada
+
     }
 
     private void showBookDetails(Book book) {

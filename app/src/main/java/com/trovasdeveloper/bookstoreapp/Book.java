@@ -14,7 +14,7 @@ public class Book {
         this.authors = authors;
         this.description = description;
         this.buyLink = buyLink;
-        this.isFavorite = false;
+        this.isFavorite = isFavorite;
     }
 
     // Método para verificar se é favorito

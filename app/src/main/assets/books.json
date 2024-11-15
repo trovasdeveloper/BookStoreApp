@@ -11,77 +11,77 @@
     "authors": ["Stanley B. Lippman", "Josee Lajoie", "Barbara E. Moo"],
     "description": "C++ foundational book",
     "buyLink": "https://link.to/buy/cppprimer",
-    "isFavorite": true
+    "isFavorite": false
   },
   {
     "title": "Kotlin Primer",
     "authors": ["Stanley B. Lippman", "Josee Lajoie", "Barbara E. Moo"],
     "description": "C++ foundational book",
     "buyLink": "https://link.to/buy/cppprimer",
-    "isFavorite": true
+    "isFavorite": false
   },
   {
     "title": "C++ Primer",
     "authors": ["Stanley B. Lippman", "Josee Lajoie", "Barbara E. Moo"],
     "description": "C++ foundational book",
     "buyLink": "https://link.to/buy/cppprimer",
-    "isFavorite": true
+    "isFavorite": false
   },
   {
     "title": "PHP",
     "authors": ["Stanley B. Lippman", "Josee Lajoie", "Barbara E. Moo"],
     "description": "C++ foundational book",
     "buyLink": "https://link.to/buy/cppprimer",
-    "isFavorite": true
+    "isFavorite": false
   },
   {
     "title": "C++ Primer",
     "authors": ["Stanley B. Lippman", "Josee Lajoie", "Barbara E. Moo"],
     "description": "C++ foundational book",
     "buyLink": "https://link.to/buy/cppprimer",
-    "isFavorite": true
+    "isFavorite": false
   },
   {
-    "title": "C++ Primer",
+    "title": "Wordpress",
     "authors": ["Stanley B. Lippman", "Josee Lajoie", "Barbara E. Moo"],
     "description": "C++ foundational book",
     "buyLink": "https://link.to/buy/cppprimer",
-    "isFavorite": true
+    "isFavorite": false
   },
   {
-    "title": "C++ Primer",
+    "title": "Javascript",
     "authors": ["Stanley B. Lippman", "Josee Lajoie", "Barbara E. Moo"],
     "description": "C++ foundational book",
     "buyLink": "https://link.to/buy/cppprimer",
-    "isFavorite": true
+    "isFavorite": false
   },
   {
-    "title": "C++ Primer",
+    "title": "HTML5",
     "authors": ["Stanley B. Lippman", "Josee Lajoie", "Barbara E. Moo"],
     "description": "C++ foundational book",
     "buyLink": "https://link.to/buy/cppprimer",
-    "isFavorite": true
+    "isFavorite": false
   },
   {
-    "title": "C++ Primer",
+    "title": "Kotlin Containers",
     "authors": ["Stanley B. Lippman", "Josee Lajoie", "Barbara E. Moo"],
     "description": "C++ foundational book",
     "buyLink": "https://link.to/buy/cppprimer",
-    "isFavorite": true
+    "isFavorite": false
   },
   {
-    "title": "C++ Primer",
+    "title": "Automotive Programming",
     "authors": ["Stanley B. Lippman", "Josee Lajoie", "Barbara E. Moo"],
     "description": "C++ foundational book",
     "buyLink": "https://link.to/buy/cppprimer",
-    "isFavorite": true
+    "isFavorite": false
   },
   {
-    "title": "C++ Primer",
+    "title": "Design Patterns",
     "authors": ["Stanley B. Lippman", "Josee Lajoie", "Barbara E. Moo"],
     "description": "C++ foundational book",
     "buyLink": "https://link.to/buy/cppprimer",
-    "isFavorite": true
+    "isFavorite": false
   },
   {
     "title": "C++ Primer",
@@ -95,6 +95,6 @@
     "authors": ["Robert C. Martin"],
     "description": "Principles of software craftsmanship",
     "buyLink": "https://link.to/buy/cleancode",
-    "isFavorite": false
+    "isFavorite": true
   }
 ]

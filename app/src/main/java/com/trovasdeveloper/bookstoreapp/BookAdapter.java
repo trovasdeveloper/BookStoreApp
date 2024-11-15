@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder>
@@ -92,8 +93,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     // Método para atualizar a lista de livros
     public void updateBooks(List<Book> newBooks) {
-        books.clear();
-        books.addAll(newBooks);
+        books = new ArrayList<>(newBooks);
         notifyDataSetChanged();
     }
 
